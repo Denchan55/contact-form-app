@@ -153,8 +153,8 @@
                 class="w-full px-4 py-3 bg-[#f5f5f5] border-0 text-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-300 appearance-none cursor-pointer">
                 <option value="" disabled {{ old('category_id') == '' ? 'selected' : '' }}>選択してください</option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                        {{ $category->content }}
+                    <option value="{{ $category['id'] }}">
+                        {{ $category['name'] }}
                     </option>
                 @endforeach
             </select>

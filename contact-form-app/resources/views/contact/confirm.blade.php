@@ -4,7 +4,8 @@
             <h1 class="text-2xl font-serif text-[#6b5744] text-center mb-10">Confirm</h1>
 
             <!-- 確認画面 -->
-            <form action="/contacts" method="post">
+            <form action="{{ route('contact.thanks') }}" method="POST">
+
                 @csrf
 
                 <!-- お名前 -->
@@ -80,9 +81,15 @@
                         <span class="text-sm font-medium text-white">お問い合わせの種類</span>
                     </div>
                     <div class="col-span-2 bg-white px-6 py-4 flex items-center">
-                        <span class="text-[#6b5744]">{{ $category->content }}</span>
+                        @php
+                            $selectedCategory = collect($categories)->firstWhere('id', $validated['category_id']);
+                        @endphp
+                        <span class="text-[#6b5744]">
+                            {{ $selectedCategory['name'] ?? '' }}
+                        </span>
                     </div>
                 </div>
+
 
                 <!-- タグ -->
                 @isset($tags)
