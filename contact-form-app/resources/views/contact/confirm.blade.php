@@ -133,16 +133,28 @@
 
                 <!-- ボタン -->
                 <div class="flex justify-center gap-4 mt-10">
-                    <button type="submit"
-                        class="px-16 py-3 bg-[#7d7470] hover:bg-[#6b5f57] border border-transparent rounded font-medium text-white transition">
-                        送信
-                    </button>
-                    <button type="button" onclick="history.back()"
-                        class="px-8 py-3 text-[#6b5744] transition">
-                        修正
-                    </button>
+
+                    <div class="flex justify-center gap-4 mt-10">
+
+                        <!-- 送信フォーム -->
+                        <form action="{{ route('contact.thanks') }}" method="POST">
+                            @csrf
+                            <button type="submit"
+                                class="px-16 py-3 bg-[#7d7470] hover:bg-[#6b5f57] border border-transparent rounded font-medium text-white transition">
+                                送信
+                            </button>
+                        </form>
+
+                        <!-- 修正フォーム -->
+                        <form action="{{ route('contact.back') }}" method="POST">
+                            @csrf
+                            <button type="submit"
+                                class="px-8 py-3 text-[#6b5744] border border-[#6b5744] rounded hover:bg-gray-100 transition">
+                                修正
+                            </button>
+                        </form>
+
+                    </div>
+
                 </div>
-            </form>
-        </div>
-    </div>
 </x-guest-layout>

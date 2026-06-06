@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="header">
         <form action="/logout" method="post">
             @csrf
@@ -120,4 +120,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>
