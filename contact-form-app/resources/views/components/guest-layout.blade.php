@@ -16,17 +16,20 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased bg-[#e8e4df]">
+<!-- 背景を完全に白に変更 -->
+
+<body class="font-sans antialiased bg-white">
+
     <header class="bg-white border-b border-[#d9d5d0] relative">
         <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-            <div class="w-24 flex justify-start">
-                <!-- 左側のスペース（ボタン幅に合わせて固定） -->
-            </div>
+            <div class="w-24 flex justify-start"></div>
+
             <div class="absolute left-1/2 transform -translate-x-1/2">
                 <a class="text-2xl font-serif text-amber-900 hover:text-amber-800" href="/">
                     FashionablyLate
                 </a>
             </div>
+
             <div class="w-24 flex justify-end">
                 @if (request()->routeIs('login'))
                     <a href="{{ route('register') }}"
@@ -42,9 +45,12 @@
             </div>
         </div>
     </header>
-    <main>
+
+    <!-- カードなし、白背景に溶け込む -->
+    <main class="max-w-5xl mx-auto py-12 px-4">
         {{ $slot }}
     </main>
+
     @stack('scripts')
 </body>
 

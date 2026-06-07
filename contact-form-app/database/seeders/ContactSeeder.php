@@ -7,10 +7,8 @@ use App\Models\Contact;
 
 class ContactSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         Contact::factory()->count(10)->create();
-        $this->call(ContactSeeder::class);
     }
-    
 }
