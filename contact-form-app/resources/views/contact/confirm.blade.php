@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :title="'Confirm'">
     <div class="bg-white min-h-screen">
         <div class="max-w-3xl mx-auto px-8 py-12">
             <h1 class="text-2xl font-serif text-[#6b5744] text-center mb-10">Confirm</h1>
@@ -148,11 +148,30 @@
                         <!-- 修正フォーム -->
                         <form action="{{ route('contact.back') }}" method="POST">
                             @csrf
+
+                            <input type="hidden" name="first_name" value="{{ $validated['first_name'] }}">
+                            <input type="hidden" name="last_name" value="{{ $validated['last_name'] }}">
+                            <input type="hidden" name="gender" value="{{ $validated['gender'] }}">
+                            <input type="hidden" name="email" value="{{ $validated['email'] }}">
+                            <input type="hidden" name="tel" value="{{ $validated['tel'] }}">
+                            <input type="hidden" name="address" value="{{ $validated['address'] }}">
+                            <input type="hidden" name="building" value="{{ $validated['building'] ?? '' }}">
+                            <input type="hidden" name="category_id" value="{{ $validated['category_id'] }}">
+
+                            @if (!empty($validated['tag_ids']))
+                                @foreach ($validated['tag_ids'] as $tagId)
+                                    <input type="hidden" name="tag_ids[]" value="{{ $tagId }}">
+                                @endforeach
+                            @endif
+
+                            <input type="hidden" name="detail" value="{{ $validated['detail'] }}">
+
                             <button type="submit"
                                 class="px-8 py-3 text-[#6b5744] border border-[#6b5744] rounded hover:bg-gray-100 transition">
                                 修正
                             </button>
                         </form>
+
 
                     </div>
 

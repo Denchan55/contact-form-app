@@ -6,17 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title ?? config('app.name') }}</title>
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
 </head>
-
-<!-- 背景を完全に白に変更 -->
 
 <body class="font-sans antialiased bg-white">
 
@@ -46,12 +44,11 @@
         </div>
     </header>
 
-    <!-- カードなし、白背景に溶け込む -->
     <main class="max-w-5xl mx-auto py-12 px-4">
         {{ $slot }}
     </main>
 
-    @stack('scripts')
+    @vite(['resources/js/app.js'])
 </body>
 
 </html>

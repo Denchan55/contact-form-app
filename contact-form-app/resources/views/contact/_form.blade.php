@@ -63,7 +63,19 @@
 
 <!-- 電話番号 -->
 @php
-    $telParts = explode('-', old('tel', ''));
+    $oldTel = old('tel', '');
+
+    if (strpos($oldTel, '-') !== false) {
+        // ハイフンあり → explode
+        $telParts = explode('-', $oldTel);
+    } else {
+        // ハイフンなし → 3分割
+        $telParts = [
+            substr($oldTel, 0, 3),
+            substr($oldTel, 3, 4),
+            substr($oldTel, 7, 4),
+        ];
+    }
     $tel1 = old('tel1', $telParts[0] ?? '');
     $tel2 = old('tel2', $telParts[1] ?? '');
     $tel3 = old('tel3', $telParts[2] ?? '');
@@ -76,16 +88,19 @@
     </div>
     <div class="col-span-2">
         <div class="flex items-center gap-2">
-            <input type="tel" name="tel1" placeholder="080" value="{{ $tel1 }}" maxlength="4"
-                class="w-24 px-4 py-2 bg-white border border-[#d9d5d0] rounded-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#c4bab0]" />
-            <span class="text-gray-500">-</span>
-            <input type="tel" name="tel2" placeholder="1234" value="{{ $tel2 }}" maxlength="4"
-                class="w-24 px-4 py-2 bg-white border border-[#d9d5d0] rounded-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#c4bab0]" />
-            <span class="text-gray-500">-</span>
-            <input type="tel" name="tel3" placeholder="5678" value="{{ $tel3 }}" maxlength="4"
-                class="w-24 px-4 py-2 bg-white border border-[#d9d5d0] rounded-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#c4bab0]" />
-        </div>
-        <input type="hidden" name="tel" id="tel" value="{{ old('tel') }}">
+    <input type="tel" name="tel1" id="tel1" placeholder="080" value="{{ $tel1 }}" maxlength="4"
+        class="w-24 px-4 py-2 bg-white border border-[#d9d5d0] rounded-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#c4bab0]" />
+    <span class="text-gray-500">-</span>
+    <input type="tel" name="tel2" id="tel2" placeholder="1234" value="{{ $tel2 }}" maxlength="4"
+        class="w-24 px-4 py-2 bg-white border border-[#d9d5d0] rounded-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#c4bab0]" />
+    <span class="text-gray-500">-</span>
+    <input type="tel" name="tel3" id="tel3" placeholder="5678" value="{{ $tel3 }}" maxlength="4"
+        class="w-24 px-4 py-2 bg-white border border-[#d9d5d0] rounded-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#c4bab0]" />
+</div>
+
+<input type="hidden" name="tel" id="tel" />
+
+
         @error('tel')
             <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
         @enderror

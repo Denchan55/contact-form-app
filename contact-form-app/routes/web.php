@@ -54,6 +54,15 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/tags/{tag}/edit', [AdminTagController::class, 'edit'])->name('admin.tags.edit');
     Route::put('/tags/{tag}', [AdminTagController::class, 'update'])->name('admin.tags.update');
     Route::delete('/tags/{tag}', [AdminTagController::class, 'destroy'])->name('admin.tags.destroy');
-});
+    });
 
+// 管理画面トップ（検索・一覧）
+Route::get('/admin', [ContactController::class, 'adminIndex'])
+    ->name('admin.contacts.index');
 
+// 管理画面 詳細ページ
+Route::get('/admin/contacts/{id}', [ContactController::class, 'adminShow'])
+    ->name('admin.contacts.show');
+
+Route::get('/admin/contacts/{id}', [ContactController::class, 'adminShow'])
+    ->name('admin.contacts.show');

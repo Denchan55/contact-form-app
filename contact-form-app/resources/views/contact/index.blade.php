@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :title="'Contact'">
     <div class="bg-white min-h-screen">
         <div class="max-w-3xl mx-auto px-8 py-12">
             <h1 class="text-2xl font-serif text-[#6b5744] text-center mb-10">Contact</h1>
@@ -19,7 +19,4 @@
         </div>
     </div>
 
-    @push('scripts')
-        @vite(['resources/js/contact/init.js'])
-    @endpush
 </x-guest-layout>

@@ -62,13 +62,12 @@
                             エクスポート
                         </a>
                     </div>
-                    <!-- ページネーション -->
-                    <div class="flex items-center">
-                        {{ $contacts->appends(request()->query())->links() }}
-                    </div>
                 </form>
             </div>
-
+            <!-- ページネーション（ここに移動） -->
+            <div class="justify-start mb-3">
+                {{ $contacts->appends(request()->query())->links('vendor.pagination.simple') }}
+            </div>
             <!-- テーブル -->
             <div class="bg-white rounded overflow-hidden border border-gray-200">
                 <table class="w-full">
