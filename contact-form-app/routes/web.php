@@ -48,6 +48,10 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
     // 管理画面トップ（検索・一覧）
     Route::get('/', [AdminContactController::class, 'index'])
         ->name('admin.contacts.index');
+// エクスポート機能
+    Route::get('/contacts/export', [AdminContactController::class, 'export'])
+        ->name('admin.contacts.export');
+
 
     // お問い合わせ一覧・詳細
     Route::get('/contacts', [AdminContactController::class, 'index'])
@@ -64,4 +68,7 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
         ->name('admin.tags.update');
     Route::delete('/tags/{tag}', [AdminTagController::class, 'destroy'])
         ->name('admin.tags.destroy');
+
+    
 });
+
