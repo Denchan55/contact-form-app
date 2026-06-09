@@ -19,12 +19,12 @@ class StoreContactRequest extends FormRequest
         return [
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
-            'gender' => 'required|integer',
+            'gender' => ['required', 'integer', 'in:1,2,3'],
             'email' => 'required|email|max:255',
-            'tel' => 'required|string|max:20',
+            'tel' => ['required', 'regex:/^[0-9]{10,11}$/'],
             'address' => 'required|string|max:255',
             'building' => 'nullable|string|max:255',
-            'category_id' => 'required|integer',
+            'category_id' => ['required', 'integer', 'in:1,2,3,4,5'],
             'detail' => 'required|string|max:120',
 
             'tag_ids' => 'nullable|array',
