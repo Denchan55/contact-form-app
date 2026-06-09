@@ -28,8 +28,9 @@ class ContactController extends Controller
     public function confirm(StoreContactRequest $request)
     {
         $request->merge([
-            'tel' => $request->tel1.'-'.$request->tel2.'-'.$request->tel3,
-        ]);
+        'tel' => $request->tel1.$request->tel2.$request->tel3,
+    ]);
+
 
         $validated = $request->validated();
 
