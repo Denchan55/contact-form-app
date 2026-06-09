@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="header">
         <form action="/logout" method="post">
             @csrf
@@ -105,7 +105,7 @@
 
             <!-- アクションボタン -->
             <div class="flex justify-center gap-4 mt-8">
-                <a href="/admin"
+                <a href="{{ route('admin.contacts.index') }}"
                     class="px-8 py-3 bg-[#7d7470] hover:bg-[#6b5f57] border border-transparent rounded font-medium text-white transition">
                     一覧に戻る
                 </a>
@@ -120,4 +120,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>

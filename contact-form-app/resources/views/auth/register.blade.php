@@ -1,82 +1,45 @@
-<x-guest-layout>
-    <div class="min-h-screen flex flex-col justify-center items-center py-6 px-4">
-        <div class="w-full max-w-md">
-            <h1 class="text-3xl font-serif text-amber-900 text-center mb-6">{{ __('Register') }}</h1>
-            <div class="bg-white rounded-lg shadow-sm">
-                <form method="POST" action="{{ route('register') }}" class="px-8 py-8" novalidate>
-                    @csrf
+<x-auth-layout :showLogin="true">
 
-                    <!-- Name -->
-                    <div>
-                        <label for="name" class="block font-medium text-sm text-amber-900">
-                            {{ __('お名前') }}
-                        </label>
-                        <input id="name"
-                            class="block mt-1 w-full border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-300 focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-3 py-2"
-                            type="text" name="name" value="{{ old('name') }}" placeholder="山田 太郎" required
-                            autofocus />
-                        @if ($errors->get('name'))
-                            <ul class="text-sm text-red-600 space-y-1 mt-2">
-                                @foreach ((array) $errors->get('name') as $message)
-                                    <li>{{ $message }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </div>
+    <!-- タイトル（カードの外・中央） -->
+    <h2 class="text-center text-2xl font-serif text-[#6b4f3f] mt-16 mb-8">
+        Register
+    </h2>
 
-                    <!-- Email Address -->
-                    <div class="mt-4">
-                        <label for="email" class="block font-medium text-sm text-amber-900">
-                            {{ __('メールアドレス') }}
-                        </label>
-                        <input id="email"
-                            class="block mt-1 w-full border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-300 focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-3 py-2"
-                            type="email" name="email" value="{{ old('email') }}" placeholder="email@example.com"
-                            required />
-                        @if ($errors->get('email'))
-                            <ul class="text-sm text-red-600 space-y-1 mt-2">
-                                @foreach ((array) $errors->get('email') as $message)
-                                    <li>{{ $message }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </div>
+    <!-- カード -->
+    <div class="w-full max-w-md bg-white p-8 rounded shadow">
+        <form method="POST" action="{{ route('admin.register.post') }}">
+            @csrf
 
-                    <!-- Password -->
-                    <div class="mt-4">
-                        <label for="password" class="block font-medium text-sm text-amber-900">
-                            {{ __('パスワード') }}
-                        </label>
-                        <input id="password"
-                            class="block mt-1 w-full border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-300 focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-3 py-2"
-                            type="password" name="password" placeholder="password" required />
-                        @if ($errors->get('password'))
-                            <ul class="text-sm text-red-600 space-y-1 mt-2">
-                                @foreach ((array) $errors->get('password') as $message)
-                                    <li>{{ $message }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </div>
-
-                    <!-- Confirm Password -->
-                    <div class="mt-4">
-                        <label for="password_confirmation" class="block font-medium text-sm text-amber-900">
-                            {{ __('パスワード確認') }}
-                        </label>
-                        <input id="password_confirmation"
-                            class="block mt-1 w-full border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-300 focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm px-3 py-2"
-                            type="password" name="password_confirmation" placeholder="password" required />
-                    </div>
-
-                    <div class="flex items-center justify-center mt-6">
-                        <button type="submit"
-                            class="inline-flex items-center px-6 py-2 bg-[#82746a] hover:bg-[#6b5f57] focus:bg-[#6b5f57] active:bg-[#5a4f47] border border-transparent rounded-md font-semibold text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#82746a] focus:ring-offset-2 transition ease-in-out duration-150 disabled:opacity-25">
-                            {{ __('登録') }}
-                        </button>
-                    </div>
-                </form>
+            <div class="mb-4">
+                <label class="block text-sm text-[#6b4f3f] mb-1">名前</label>
+                <input type="text" name="name" placeholder="名前"
+                    class="w-full px-4 py-2 border border-[#d6cfc7] rounded focus:outline-none focus:border-[#6b4f3f]">
             </div>
-        </div>
+
+            <div class="mb-4">
+                <label class="block text-sm text-[#6b4f3f] mb-1">メールアドレス</label>
+                <input type="email" name="email" placeholder="email@example.com"
+                    class="w-full px-4 py-2 border border-[#d6cfc7] rounded focus:outline-none focus:border-[#6b4f3f]">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm text-[#6b4f3f] mb-1">パスワード</label>
+                <input type="password" name="password" placeholder="password"
+                    class="w-full px-4 py-2 border border-[#d6cfc7] rounded focus:outline-none focus:border-[#6b4f3f]">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm text-[#6b4f3f] mb-1">パスワード確認</label>
+                <input type="password" name="password_confirmation" placeholder="password"
+                    class="w-full px-4 py-2 border border-[#d6cfc7] rounded focus:outline-none focus:border-[#6b4f3f]">
+            </div>
+
+            <!-- 小さめ・中央寄せの登録ボタン -->
+            <button type="submit"
+                class="px-6 py-2 bg-[#6b4f3f] text-white rounded hover:bg-[#5a4234] transition mx-auto block">
+                登録
+            </button>
+        </form>
     </div>
-</x-guest-layout>
+
+</x-auth-layout>

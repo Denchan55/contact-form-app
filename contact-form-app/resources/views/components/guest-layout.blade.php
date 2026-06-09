@@ -6,27 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title ?? config('app.name') }}</title>
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
 </head>
 
-<body class="font-sans antialiased bg-[#e8e4df]">
+<body class="font-sans antialiased bg-white">
+
     <header class="bg-white border-b border-[#d9d5d0] relative">
         <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-            <div class="w-24 flex justify-start">
-                <!-- 左側のスペース（ボタン幅に合わせて固定） -->
-            </div>
+            <div class="w-24 flex justify-start"></div>
+
             <div class="absolute left-1/2 transform -translate-x-1/2">
                 <a class="text-2xl font-serif text-amber-900 hover:text-amber-800" href="/">
                     FashionablyLate
                 </a>
             </div>
+
             <div class="w-24 flex justify-end">
                 @if (request()->routeIs('login'))
                     <a href="{{ route('register') }}"
@@ -42,10 +43,12 @@
             </div>
         </div>
     </header>
-    <main>
+
+    <main class="max-w-5xl mx-auto py-12 px-4">
         {{ $slot }}
     </main>
-    @stack('scripts')
+
+    @vite(['resources/js/app.js'])
 </body>
 
 </html>
