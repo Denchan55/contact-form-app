@@ -11,24 +11,32 @@
 
 <body class="bg-[#f7f3ee] min-h-screen flex flex-col">
 
+
     <!-- ヘッダー -->
-    <header class="w-full bg-[#f7f3ee] px-6 py-4 flex justify-between items-center">
+    <header class="relative w-full bg-white px-8 py-4 flex justify-center items-center border-b border-[#e0d8d0]">
         <h1 class="text-xl font-serif text-[#6b4f3f]">FashionablyLate</h1>
 
-        @isset($showRegister)
-            <a href="{{ route('admin.register') }}" class="text-[#6b4f3f] hover:underline">register</a>
-        @endisset
+        @if ($showLogin ?? false)
+            <a href="{{ route('admin.login') }}"
+                class="absolute right-8 px-4 py-1.5 border border-[#ddd8d3] text-[#6b4f3f] bg-white rounded hover:bg-gray-50 transition">
+                login
+            </a>
+        @endif
 
-        @isset($showLogin)
-            <a href="{{ route('admin.login') }}" class="text-[#6b4f3f] hover:underline">login</a>
-        @endisset
+        @if ($showRegister ?? false)
+            <a href="{{ route('admin.register') }}"
+                class="absolute right-8 px-4 py-1.5 border border-[#ddd8d3] text-[#6b4f3f] bg-white rounded hover:bg-gray-50 transition">
+                register
+            </a>
+        @endif
+
     </header>
 
-    <!-- メイン -->
-    <main class="flex-1 flex justify-center items-start mt-12">
+    <main class="flex-1 flex flex-col items-center mt-12">
         {{ $slot }}
     </main>
 
 </body>
+
 
 </html>

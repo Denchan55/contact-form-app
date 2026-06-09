@@ -1,71 +1,11 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# COACHTECH お問い合わせフォーム
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 概要
 
-## About Laravel
+本プロジェクトは、COACHTECH 課題として作成した「お問い合わせフォーム」アプリケーションです。  
+ユーザーからのお問い合わせを受け付け、管理者画面で確認・検索・詳細閲覧ができる機能を実装しています。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## ER Diagram
+## ER図
 
 ```mermaid
 erDiagram
@@ -110,3 +50,64 @@ erDiagram
   contacts ||--o{ contact_tag : "1対多"
   tags ||--o{ contact_tag : "1対多"
 ```
+
+##　環境構築手順
+
+1．レポジトリをクローン
+git clone <git@github.com:Denchan55/contact-form-app.git>
+cd <new-contact-form/contact-form-app>
+
+2．Docker（Laravel Sail）を起動
+cp .env.example .env
+./vendor/bin/sail up -d
+
+3.依存関係のインストール
+./vendor/bin/sail composer install
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run dev
+
+4.アプリケーションキーの作成
+./vendor/bin/sail artisan key:generate
+
+5.マイグレーション&シーディング
+./vendor/bin/sail artisan migrate --seed
+
+##　使用技術
+Laravel 10
+PHP 8.2
+MySQL 8.0
+Docker / Laravel Sail
+Tailwind CSS
+Vite
+
+## APIエンドポイント一覧
+
+### ユーザー側（お問い合わせフォーム）
+
+| メソッド | パス     | 概要                   |
+| -------- | -------- | ---------------------- |
+| GET      | /        | 入力フォーム表示       |
+| POST     | /confirm | 入力内容の確認         |
+| POST     | /back    | 入力画面に戻る         |
+| POST     | /store   | お問い合わせ内容の保存 |
+| GET      | /thanks  | 送信完了画面           |
+
+### 管理者側（Admin）
+
+| メソッド | パス          | 概要                                |
+| -------- | ------------- | ----------------------------------- |
+| GET      | /admin/login  | ログイン画面                        |
+| POST     | /admin/login  | ログイン処理                        |
+| POST     | /admin/logout | ログアウト                          |
+| GET      | /admin        | お問い合わせ一覧                    |
+| GET      | /admin/search | 検索機能                            |
+| GET      | /admin/{id}   | 詳細画面                            |
+| GET      | /admin/export | CSVエクスポート（実装している場合） |
+
+##　開発環境URL
+http://localhost
+http://localhost/admin/login
+
+## 作成者
+
+江草英樹

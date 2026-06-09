@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class AdminAuthController extends Controller
 {
@@ -17,11 +17,11 @@ class AdminAuthController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:admins',
             'password' => 'required|confirmed|min:6',
         ]);
 
-        User::create([
+        Admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -39,7 +39,7 @@ class AdminAuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials)) {
             return redirect()->route('admin.contacts.index');
         }
 
@@ -50,7 +50,8 @@ class AdminAuthController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
+
         return redirect()->route('admin.login');
     }
 }

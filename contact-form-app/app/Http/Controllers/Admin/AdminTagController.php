@@ -12,6 +12,7 @@ class AdminTagController extends Controller
     {
         $request->validate(['name' => 'required']);
         Tag::create(['name' => $request->name]);
+
         return back();
     }
 
@@ -24,12 +25,14 @@ class AdminTagController extends Controller
     {
         $request->validate(['name' => 'required']);
         $tag->update(['name' => $request->name]);
+
         return redirect()->route('admin.contacts.index');
     }
 
     public function destroy(Tag $tag)
     {
         $tag->delete();
+
         return back();
     }
 }

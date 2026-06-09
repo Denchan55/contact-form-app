@@ -1,8 +1,12 @@
 <x-auth-layout :showLogin="true">
 
-    <div class="bg-white w-full max-w-md mx-auto p-8 rounded shadow">
-        <h2 class="text-center text-2xl font-serif text-[#6b4f3f] mb-6">Register</h2>
+    <!-- タイトル（カードの外・中央） -->
+    <h2 class="text-center text-2xl font-serif text-[#6b4f3f] mt-16 mb-8">
+        Register
+    </h2>
 
+    <!-- カード -->
+    <div class="w-full max-w-md bg-white p-8 rounded shadow">
         <form method="POST" action="{{ route('admin.register.post') }}">
             @csrf
 
@@ -30,7 +34,9 @@
                     class="w-full px-4 py-2 border border-[#d6cfc7] rounded focus:outline-none focus:border-[#6b4f3f]">
             </div>
 
-            <button type="submit" class="w-full py-2 bg-[#6b4f3f] text-white rounded hover:bg-[#5a4234] transition">
+            <!-- 小さめ・中央寄せの登録ボタン -->
+            <button type="submit"
+                class="px-6 py-2 bg-[#6b4f3f] text-white rounded hover:bg-[#5a4234] transition mx-auto block">
                 登録
             </button>
         </form>

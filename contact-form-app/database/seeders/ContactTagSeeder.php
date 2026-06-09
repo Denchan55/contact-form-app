@@ -2,14 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Models\Contact;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 class ContactTagSeeder extends Seeder
 {
     public function run(): void
     {
-        $contacts = \App\Models\Contact::all();
-        $tags = \App\Models\Tag::all();
+        $contacts = Contact::all();
+        $tags = Tag::all();
 
         if ($tags->isEmpty()) {
             return;
